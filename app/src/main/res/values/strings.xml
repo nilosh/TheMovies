@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">TheMovies</string>
+    <string name="title_activity_landing_page">MainActivity</string>
+    <string name="bottom_nav_1">Popular</string>
+    <string name="bottom_nav_2">Search</string>
+    <string name="bottom_nav_3">Favourites</string>
+    <string name="bottom_nav_4">Upcoming</string>
+    <string name="popular_movies">Popular Movies</string>
+    <string name="popular_tv_shows">Popular TV Shows</string>
 </resources>
