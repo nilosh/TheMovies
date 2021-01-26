@@ -9,8 +9,8 @@ public class PopularMovies {
     private String moviePoster, movieTitle, movieReleaseDate, movieRating;
 
     // Constructor for creating popular movies.
-    public PopularMovies(int movieId, String moviePoster, String movieTitle, String movieReleaseDate,
-                         String movieRating) {
+    public PopularMovies(int movieId, String moviePoster, String movieTitle,
+                         String movieReleaseDate, String movieRating) {
         this.movieId = movieId;
         this.moviePoster = moviePoster;
         this.movieTitle = movieTitle;
@@ -32,7 +32,7 @@ public class PopularMovies {
     }
 
     public String getMovieReleaseDate() {
-        return movieReleaseDate;
+        return movieReleaseDate.substring(0,4);
     }
 
     public String getMovieRating() {

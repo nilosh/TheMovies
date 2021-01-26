@@ -1,87 +1,94 @@
 package com.example.themovies.models;
 
+import android.util.Log;
+
+import java.io.CharArrayReader;
 import java.util.ArrayList;
 
 public class MovieDetails {
     private int id;
     private String title;
-    private String overview;
     private String tagline;
-    private String releaseDate;
-    private int runtime;
-    private String status;
-    private ArrayList<String> genres;
-    private ArrayList<Object> productionCompanies;
-    private String backdrop;
+    private String year;
+    ArrayList<String> genres;
+    private String runtime;
+    private String description;
+    private String voteAverage;
+    private String voteCount;
+    ArrayList<Cast> cast;
     private String poster;
+    private String backdrop;
 
-    public MovieDetails(int id, String title, String releaseDate) {
+    public MovieDetails(int id, String title, String tagline, String year, ArrayList<String> genres,
+                        String runtime, String description, String voteAverage, String voteCount,
+                        String poster, String backdrop) {
         this.id = id;
         this.title = title;
-        this.releaseDate = releaseDate;
+        this.tagline = tagline;
+        this.year = year;
+        this.genres = genres;
+        this.runtime = runtime;
+        this.description = description;
+        this.voteAverage = voteAverage;
+        this.voteCount = voteCount;
+        this.poster = poster;
+        this.backdrop = backdrop;
     }
 
-    public String getOverview() {
-        return overview;
+    public int getId() {
+        return id;
     }
 
-    public void setOverview(String overview) {
-        this.overview = overview;
+    public String getTitle() {
+        return title;
     }
 
     public String getTagline() {
         return tagline;
     }
 
-    public void setTagline(String tagline) {
-        this.tagline = tagline;
-    }
+    public String getYear() {
 
-    public int getRuntime() {
-        return runtime;
-    }
-
-    public void setRuntime(int runtime) {
-        this.runtime = runtime;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
+        return year.substring(0,4);
     }
 
     public ArrayList<String> getGenres() {
         return genres;
     }
 
-    public void setGenres(ArrayList<String> genres) {
-        this.genres = genres;
+    public String getRuntime() {
+
+        int hours = Integer.parseInt(runtime) / 60;
+        int minutes = Integer.parseInt(runtime) % 60;
+
+        return hours + " Hrs and " + Math.round(minutes) + " Mins";
     }
 
-    public ArrayList<Object> getProductionCompanies() {
-        return productionCompanies;
+    public String getDescription() {
+        return description;
     }
 
-    public void setProductionCompanies(ArrayList<Object> productionCompanies) {
-        this.productionCompanies = productionCompanies;
+    public String getVoteAverage() {
+        return voteAverage;
     }
 
-    public String getBackdrop() {
-        return backdrop;
-    }
-
-    public void setBackdrop(String backdrop) {
-        this.backdrop = backdrop;
+    public String getVoteCount() {
+        return voteCount;
     }
 
     public String getPoster() {
         return poster;
     }
 
-    public void setPoster(String poster) {
-        this.poster = poster;
+    public String getBackdrop() {
+        return backdrop;
+    }
+
+    public ArrayList<Cast> getCast() {
+        return cast;
+    }
+
+    public void setCast(ArrayList<Cast> cast) {
+        this.cast = cast;
     }
 }

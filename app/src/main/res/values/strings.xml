@@ -7,4 +7,19 @@
     <string name="bottom_nav_4">Upcoming</string>
     <string name="popular_movies">Popular Movies</string>
     <string name="popular_tv_shows">Popular TV Shows</string>
+    <string name="movie_title">Movie Title</string>
+    <string name="movie_year">Year</string>
+    <string name="movie_genres">Genres</string>
+    <string name="movie_runtime">Runtime</string>
+    <string name="movie_description">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+        Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+    </string>
+    <string name="movie_rating">8.5 / 10</string>
+    <string name="movie_vote_count">Vote Count</string>
+    <string name="movie_tagline">Tagline</string>
+    <string name="movie_cast_text">Cast</string>
+    <string name="movie_cast_name">Actor Name</string>
 </resources>
