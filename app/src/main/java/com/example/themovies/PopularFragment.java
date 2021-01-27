@@ -1,11 +1,6 @@
 package com.example.themovies;
 
-import android.app.Activity;
-import android.content.Context;
-import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,19 +18,12 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.themovies.adapters.PopularMoviesAdapter;
 import com.example.themovies.models.Item;
-import com.example.themovies.models.MovieDetails;
 import com.example.themovies.models.PopularMovies;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -66,9 +54,8 @@ public class PopularFragment extends Fragment implements PopularMoviesAdapter.On
         // API Request to get the most popular movies.
         String POPULAR_MOVIES_URL = "https://api.themoviedb.org/3/movie/popular?" +
                 "api_key=d10738a9069219541d83289519ca9769";
+
         RequestQueue requestQueue = Volley.newRequestQueue(this.getActivity());
-
-
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, POPULAR_MOVIES_URL,
                 null, new Response.Listener<JSONObject>() {
             @Override
@@ -80,16 +67,17 @@ public class PopularFragment extends Fragment implements PopularMoviesAdapter.On
                             JSONObject results = jsonArray.getJSONObject(i);
 
                             PopularMovies movie = new PopularMovies(results.getInt("id"),
-                                    "https://image.tmdb.org/t/p/w500/" + results.getString("poster_path"),
-                                    results.getString("title"),
-                                    results.getString("release_date"),
-                                    results.getString("vote_average")
-                                    );
+                                "https://image.tmdb.org/t/p/w500/" + results.getString("poster_path"),
+                                results.getString("title"),
+                                results.getString("release_date"),
+                                results.getString("vote_average")
+                                );
 
                             // Add the movie to the movies array list.
                             movies.add(movie);
 
-                            // Add movie to items to produce cell layout.
+                            // Add movie to items to produce multi cell layout.
+                            // 0 id for large cell and 1 is for small cel.
                             if (i == 0) {
                                 items.add(new Item(0, movies.get(i)));
                             } else {
@@ -120,24 +108,16 @@ public class PopularFragment extends Fragment implements PopularMoviesAdapter.On
 
     @Override
     public void onMovieItemClick(int position) {
-        Intent intent = new Intent(this.getActivity(), MovieDetail.class);
-        PopularMovies itemClicked = movies.get(position);
-        intent.putExtra(EXTRA_ID, itemClicked.getMovieId());
-        startActivity(intent);
-    }
 
-//    private String convertMinutesToHours(Double timeInMinutes) {
-//        int indexOfSeparator = 0;
-//        Double time = 0.0;
-//        String timeAsString = "", timeInHours = "", timeInMins = "";
-//        time = timeInMinutes / 60;
-//        timeAsString = String.valueOf(time);
-//        if (timeAsString.contains(".")) {
-//            indexOfSeparator = timeAsString.indexOf(".");
-//        } else {
-//            timeInHours = timeAsString.substring(0, indexOfSeparator);
-//            timeInMins = timeAsString.substring(indexOfSeparator + 1);
-//        }
-//         return timeInHours + "Hrs and " + timeInMins + "Minutes";
-//    }
+        PopularMovies itemClicked = movies.get(position);
+        Bundle bundle = new Bundle();
+        bundle.putInt("id", itemClicked.getMovieId());
+
+        MovieDetailFragment fragment = new MovieDetailFragment();
+        fragment.setArguments(bundle);
+
+        getActivity().getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragment_container, fragment)
+                .addToBackStack(null).commit();
+    }
 }

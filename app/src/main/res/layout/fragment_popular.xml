@@ -86,9 +86,6 @@
             android:textColor="@color/white"
             android:textSize="18sp"
             tools:ignore="MissingConstraints" />
-
-
     </RelativeLayout>
-
 
 </RelativeLayout>

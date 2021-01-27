@@ -17,11 +17,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // Add app logo to title bar.
-//        getSupportActionBar().setLogo(R.drawable.ic_launcher_logo);
-//        getSupportActionBar().setDisplayUseLogoEnabled(true);
-//        getSupportActionBar().setDisplayShowHomeEnabled(true);
-
         // Enable full screen view.
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -33,7 +28,8 @@ public class MainActivity extends AppCompatActivity {
 
         // Open first fragment as default.
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.fragment_container, new PopularFragment()).commit();
+                .replace(R.id.fragment_container, new PopularFragment())
+                .addToBackStack(null).commit();
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener navListener =

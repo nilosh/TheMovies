@@ -32,7 +32,6 @@ public class PopularMoviesAdapter extends RecyclerView.Adapter<RecyclerView.View
         movieItemClickListener = listener;
     }
 
-    // Constructor method.
     public PopularMoviesAdapter(List<Item> items) {
         this.items = items;
     }
@@ -106,7 +105,7 @@ public class PopularMoviesAdapter extends RecyclerView.Adapter<RecyclerView.View
                 }
             });
         }
-
+        // Set data to views.
         void setLgMovieDetails(PopularMovies movie) {
             Picasso.get()
                     .load(movie.getMoviePoster())
@@ -115,7 +114,6 @@ public class PopularMoviesAdapter extends RecyclerView.Adapter<RecyclerView.View
             lgMovieReleaseDate.setText(movie.getMovieReleaseDate());
             lgMovieRating.setText(movie.getMovieRating());
         }
-
     }
 
     public class PopularSmallViewHolder extends RecyclerView.ViewHolder {
@@ -142,7 +140,7 @@ public class PopularMoviesAdapter extends RecyclerView.Adapter<RecyclerView.View
                 }
             });
         }
-
+        // Set data to views.
         void setSmMovieDetails(PopularMovies movie) {
             Picasso.get()
                     .load(movie.getMoviePoster())
@@ -152,5 +150,4 @@ public class PopularMoviesAdapter extends RecyclerView.Adapter<RecyclerView.View
             smMovieRating.setText(movie.getMovieRating());
         }
     }
-
 }
