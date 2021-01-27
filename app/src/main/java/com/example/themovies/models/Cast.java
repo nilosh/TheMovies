@@ -6,10 +6,11 @@ public class Cast {
     private String character;
     private String photo;
 
-    public Cast(int id, String name, String character) {
+    public Cast(int id, String name, String character, String photo) {
         this.id = id;
         this.name = name;
         this.character = character;
+        this.photo = photo;
     }
 
     public int getId() {
@@ -25,10 +26,6 @@ public class Cast {
     }
 
     public String getPhoto() {
-        return photo;
-    }
-
-    public void setPhoto(String photo) {
-        this.photo = photo;
+        return "https://image.tmdb.org/t/p/w500/" + photo;
     }
 }

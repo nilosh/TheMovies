@@ -119,22 +119,5 @@ public class PopularFragment extends Fragment implements PopularMoviesAdapter.On
         getActivity().getSupportFragmentManager().beginTransaction()
                 .replace(R.id.fragment_container, fragment)
                 .addToBackStack(null).commit();
-
-
     }
-
-//    private String convertMinutesToHours(Double timeInMinutes) {
-//        int indexOfSeparator = 0;
-//        Double time = 0.0;
-//        String timeAsString = "", timeInHours = "", timeInMins = "";
-//        time = timeInMinutes / 60;
-//        timeAsString = String.valueOf(time);
-//        if (timeAsString.contains(".")) {
-//            indexOfSeparator = timeAsString.indexOf(".");
-//        } else {
-//            timeInHours = timeAsString.substring(0, indexOfSeparator);
-//            timeInMins = timeAsString.substring(indexOfSeparator + 1);
-//        }
-//         return timeInHours + "Hrs and " + timeInMins + "Minutes";
-//    }
 }

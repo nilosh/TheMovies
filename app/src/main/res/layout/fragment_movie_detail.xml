@@ -11,8 +11,7 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            >
+            android:layout_height="wrap_content" >
 
             <ImageView
                 android:id="@+id/movieDetailBanner"
@@ -21,7 +20,7 @@
                 android:layout_marginTop="-30dp"
                 android:layout_marginLeft="-30dp"
                 android:layout_marginRight="-30dp"
-                android:src="@mipmap/ic_launcher" />
+                android:src="@drawable/placeholder_image" />
 
             <TextView
                 android:id="@+id/movieDetailTitle"
@@ -76,12 +75,9 @@
                 android:id="@+id/movieDetailRuntime"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignTop="@+id/movieDetailGenres"
-                android:layout_alignParentEnd="true"
-                android:layout_marginStart="0dp"
-                android:layout_marginTop="0dp"
-                android:layout_marginEnd="0dp"
-                android:paddingRight="30dp"
+                android:layout_below="@+id/movieDetailGenres"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="5dp"
                 android:text="@string/movie_runtime"
                 android:textColor="@color/ash"
                 android:textSize="16sp" />
@@ -90,7 +86,7 @@
                 android:id="@+id/movieDetailDescription"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/movieDetailGenres"
+                android:layout_below="@+id/movieDetailRuntime"
                 android:layout_marginTop="20dp"
                 android:justificationMode="inter_word"
                 android:lineHeight="20dp"
@@ -108,7 +104,7 @@
                 android:layout_marginStart="0dp"
                 android:layout_marginTop="10dp"
                 android:paddingLeft="30dp"
-                android:src="@mipmap/ic_launcher" />
+                android:src="@drawable/placeholder_image" />
 
             <ImageView
                 android:id="@+id/movieDetailRatingStar"
@@ -173,6 +169,7 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/movieDetailCastRecyclerView"
+                android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignTop="@+id/hr"

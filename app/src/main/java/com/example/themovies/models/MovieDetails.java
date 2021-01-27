@@ -1,8 +1,4 @@
 package com.example.themovies.models;
-
-import android.util.Log;
-
-import java.io.CharArrayReader;
 import java.util.ArrayList;
 
 public class MovieDetails {
@@ -57,7 +53,6 @@ public class MovieDetails {
     }
 
     public String getRuntime() {
-
         int hours = Integer.parseInt(runtime) / 60;
         int minutes = Integer.parseInt(runtime) % 60;
 
