@@ -1,5 +1,6 @@
 package com.app.themovies;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,11 +12,9 @@ import androidx.fragment.app.Fragment;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.squareup.picasso.Picasso;
 
 public class AccountFragment extends Fragment {
-
-    TextView name, email;
-    ImageView photo;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -23,22 +22,27 @@ public class AccountFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_account, container, false);
 
-        // Initialize object for google sign in account and get data if account is not null.
+       TextView name = view.findViewById(R.id.profileUserName);
+       TextView email = view.findViewById(R.id.profileUserEmail);
+       ImageView photo = view.findViewById(R.id.profileImage);
+
+       // Initialize object for google sign in account and get data if account is not null.
         GoogleSignInAccount googleSignInAccount = GoogleSignIn.getLastSignedInAccount(getContext());
         if (googleSignInAccount != null) {
 
-//            String userName = googleSignInAccount.getDisplayName();
-//            String userEmail = googleSignInAccount.getEmail();
-//            Uri userPhoto = googleSignInAccount.getPhotoUrl();
+            // Get user details.
+            String userName = googleSignInAccount.getDisplayName();
+            String userEmail = googleSignInAccount.getEmail();
+            Uri userPhoto = googleSignInAccount.getPhotoUrl();
 
-//            name.setText(username);
-//            email.setText(userEmail);
-//            Picasso.get()
-//                    .load(userPhoto)
-//                    .into(photo);
+            // Set user details to the views.
+            name.setText(userName);
+            email.setText(userEmail);
+            Picasso.get()
+                    .load(userPhoto)
+                    .into(photo);
         }
 
-        // Inflate the layout for this fragment
         return view;
     }
 }
