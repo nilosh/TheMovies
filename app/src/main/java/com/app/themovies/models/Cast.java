@@ -1,10 +1,10 @@
-package com.example.themovies.models;
+package com.app.themovies.models;
 
 public class Cast {
-    private int id;
-    private String name;
-    private String character;
-    private String photo;
+    private final int id;
+    private final String name;
+    private final String character;
+    private final String photo;
 
     public Cast(int id, String name, String character, String photo) {
         this.id = id;

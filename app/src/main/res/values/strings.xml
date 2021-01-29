@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">TheMovies</string>
-    <string name="title_activity_landing_page">MainActivity</string>
     <string name="bottom_nav_1">Popular</string>
     <string name="bottom_nav_2">Search</string>
     <string name="bottom_nav_3">Favourites</string>
@@ -23,4 +22,13 @@
     <string name="movie_cast_text">Cast</string>
     <string name="movie_cast_name">Actor Name</string>
     <string name="movie_cast_character">Character</string>
+    <string name="menu_profile">Profile</string>
+    <string name="menu_logout">Logout</string>
+    <string name="profile_name_tag">Name</string>
+    <string name="profile_name_text">User Name</string>
+    <string name="profile_email_tag">Email</string>
+    <string name="profile_email_text">User Email</string>
+    <string name="facebook_app_id">1962369470583461</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
 </resources>

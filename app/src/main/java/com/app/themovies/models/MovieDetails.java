@@ -1,19 +1,20 @@
-package com.example.themovies.models;
+package com.app.themovies.models;
+
 import java.util.ArrayList;
 
 public class MovieDetails {
-    private int id;
-    private String title;
-    private String tagline;
-    private String year;
+    private final int id;
+    private final String title;
+    private final String tagline;
+    private final String year;
     ArrayList<String> genres;
-    private String runtime;
-    private String description;
-    private String voteAverage;
-    private String voteCount;
+    private final String runtime;
+    private final String description;
+    private final String voteAverage;
+    private final String voteCount;
     ArrayList<Cast> cast;
-    private String poster;
-    private String backdrop;
+    private final String poster;
+    private final String backdrop;
 
     public MovieDetails(int id, String title, String tagline, String year, ArrayList<String> genres,
                         String runtime, String description, String voteAverage, String voteCount,
@@ -45,7 +46,7 @@ public class MovieDetails {
 
     public String getYear() {
 
-        return year.substring(0,4);
+        return year.substring(0, 4);
     }
 
     public ArrayList<String> getGenres() {

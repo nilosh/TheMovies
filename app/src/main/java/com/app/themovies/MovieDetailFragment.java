@@ -1,17 +1,15 @@
-package com.example.themovies;
+package com.app.themovies;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -19,9 +17,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.themovies.adapters.CastAdapter;
-import com.example.themovies.models.Cast;
-import com.example.themovies.models.MovieDetails;
+import com.app.themovies.adapters.CastAdapter;
+import com.app.themovies.models.Cast;
+import com.app.themovies.models.MovieDetails;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
@@ -57,6 +55,7 @@ public class MovieDetailFragment extends Fragment {
     private String requestUrl(String key) {
         return "https://api.themoviedb.org/3/movie/" + key + "?api_key=d10738a9069219541d83289519ca9769";
     }
+
     // Fetches all movie details by sending the API Request.
     public void fetchMovieDetails() {
         String MOVIE_DETAIL_URL = requestUrl(String.valueOf(movie_id));
@@ -64,42 +63,43 @@ public class MovieDetailFragment extends Fragment {
         RequestQueue requestQueue = Volley.newRequestQueue(this.getActivity());
 
         JsonObjectRequest objectRequest = new JsonObjectRequest(Request.Method.GET, MOVIE_DETAIL_URL, null,
-            new Response.Listener<JSONObject>() {
-                @Override
-                public void onResponse(JSONObject response) {
-                    try {
-                        // Fetches and stores the required keys and values from JSON.
-                        String backdropPath = response.getString("backdrop_path");
-                        JSONArray genres = response.getJSONArray("genres");
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            // Fetches and stores the required keys and values from JSON.
+                            String backdropPath = response.getString("backdrop_path");
+                            JSONArray genres = response.getJSONArray("genres");
 
-                        // Get all genres associated with a single single movie.
-                        for (int i = 0; i < genres.length(); i++) {
-                            JSONObject genreNames = genres.getJSONObject(i);
-                            movieGenres.add(genreNames.getString("name"));
+                            // Get all genres associated with a single single movie.
+                            for (int i = 0; i < genres.length(); i++) {
+                                JSONObject genreNames = genres.getJSONObject(i);
+                                movieGenres.add(genreNames.getString("name"));
+                            }
+
+                            String title = response.getString("title");
+                            String overview = response.getString("overview");
+                            String poster = response.getString("poster_path");
+                            String releaseDate = response.getString("release_date");
+                            String runtime = response.getString("runtime");
+                            String tagline = response.getString("tagline");
+                            String voteAverage = response.getString("vote_average");
+                            String voteCount = response.getString("vote_count");
+
+                            MovieDetails movieDetails = new MovieDetails(movie_id, title, tagline, releaseDate,
+                                    movieGenres, runtime, overview, voteAverage, voteCount, poster, backdropPath);
+
+                            generateMovieDetailView(movieDetails);
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
                         }
-
-                        String title = response.getString("title");
-                        String overview = response.getString("overview");
-                        String poster = response.getString("poster_path");
-                        String releaseDate = response.getString("release_date");
-                        String runtime = response.getString("runtime");
-                        String tagline = response.getString("tagline");
-                        String voteAverage = response.getString("vote_average");
-                        String voteCount = response.getString("vote_count");
-
-                        MovieDetails movieDetails = new MovieDetails(movie_id, title, tagline, releaseDate,
-                                movieGenres, runtime, overview, voteAverage, voteCount, poster, backdropPath);
-
-                        generateMovieDetailView(movieDetails);
-
-                    } catch (JSONException e) {
-                        e.printStackTrace();
                     }
-                }
-            }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    error.printStackTrace(); }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+            }
         });
 
         requestQueue.add(objectRequest);
@@ -145,13 +145,13 @@ public class MovieDetailFragment extends Fragment {
         if (movieDetails.getGenres().size() > 1) {
             for (int i = 0; i < movieDetails.getGenres().size(); i++) {
                 if (i != movieDetails.getGenres().size() - 1) {
-                    movieGenres = movieGenres + movieDetails.getGenres().get(i).toString() + " | ";
+                    movieGenres = movieGenres + movieDetails.getGenres().get(i) + " | ";
                 } else {
-                    movieGenres = movieGenres + movieDetails.getGenres().get(i).toString();
+                    movieGenres = movieGenres + movieDetails.getGenres().get(i);
                 }
             }
         } else {
-            movieGenres = movieDetails.getGenres().get(0).toString();
+            movieGenres = movieDetails.getGenres().get(0);
         }
         genres.setText(movieGenres);
 
@@ -161,7 +161,7 @@ public class MovieDetailFragment extends Fragment {
 
     private void displayMovieCast() {
         ArrayList<Cast> cast = new ArrayList<>();
-        String CREDITS_URL = requestUrl(String.valueOf(movie_id + "/credits"));
+        String CREDITS_URL = requestUrl(movie_id + "/credits");
         RequestQueue requestQueue = Volley.newRequestQueue(this.getActivity());
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, CREDITS_URL, null,
                 new Response.Listener<JSONObject>() {

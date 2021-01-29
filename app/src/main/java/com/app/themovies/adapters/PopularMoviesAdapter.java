@@ -1,6 +1,5 @@
-package com.example.themovies.adapters;
+package com.app.themovies.adapters;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,16 +9,16 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.themovies.R;
-import com.example.themovies.models.Item;
-import com.example.themovies.models.PopularMovies;
+import com.app.themovies.R;
+import com.app.themovies.models.Item;
+import com.app.themovies.models.PopularMovies;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
 public class PopularMoviesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    private List<Item> items;
+    private final List<Item> items;
     private OnMovieItemClickListener movieItemClickListener;
 
     // Create interface to detect on movie item click.
@@ -43,18 +42,18 @@ public class PopularMoviesAdapter extends RecyclerView.Adapter<RecyclerView.View
 
         if (viewType == 0) {
             return new PopularLargeViewHolder(
-                LayoutInflater.from(parent.getContext()).inflate(
-                        R.layout.large_cell,
-                        parent,
-                        false
-                ));
+                    LayoutInflater.from(parent.getContext()).inflate(
+                            R.layout.large_cell,
+                            parent,
+                            false
+                    ));
         } else {
             return new PopularSmallViewHolder(
-                LayoutInflater.from(parent.getContext()).inflate(
-                        R.layout.small_cell,
-                        parent,
-                        false
-                )
+                    LayoutInflater.from(parent.getContext()).inflate(
+                            R.layout.small_cell,
+                            parent,
+                            false
+                    )
             );
         }
     }
@@ -82,8 +81,10 @@ public class PopularMoviesAdapter extends RecyclerView.Adapter<RecyclerView.View
     }
 
     public class PopularLargeViewHolder extends RecyclerView.ViewHolder {
-        private ImageView lgMoviePoster;
-        private TextView lgMovieTitle, lgMovieReleaseDate, lgMovieRating;
+        private final ImageView lgMoviePoster;
+        private final TextView lgMovieTitle;
+        private final TextView lgMovieReleaseDate;
+        private final TextView lgMovieRating;
 
         PopularLargeViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -105,6 +106,7 @@ public class PopularMoviesAdapter extends RecyclerView.Adapter<RecyclerView.View
                 }
             });
         }
+
         // Set data to views.
         void setLgMovieDetails(PopularMovies movie) {
             Picasso.get()
@@ -117,8 +119,10 @@ public class PopularMoviesAdapter extends RecyclerView.Adapter<RecyclerView.View
     }
 
     public class PopularSmallViewHolder extends RecyclerView.ViewHolder {
-        private ImageView smMoviePoster;
-        private TextView smMovieTitle, smMovieReleaseDate, smMovieRating;
+        private final ImageView smMoviePoster;
+        private final TextView smMovieTitle;
+        private final TextView smMovieReleaseDate;
+        private final TextView smMovieRating;
 
         PopularSmallViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -140,6 +144,7 @@ public class PopularMoviesAdapter extends RecyclerView.Adapter<RecyclerView.View
                 }
             });
         }
+
         // Set data to views.
         void setSmMovieDetails(PopularMovies movie) {
             Picasso.get()

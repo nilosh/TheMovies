@@ -1,4 +1,4 @@
-package com.example.themovies;
+package com.app.themovies;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -16,9 +16,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.themovies.adapters.PopularMoviesAdapter;
-import com.example.themovies.models.Item;
-import com.example.themovies.models.PopularMovies;
+import com.app.themovies.adapters.PopularMoviesAdapter;
+import com.app.themovies.models.Item;
+import com.app.themovies.models.PopularMovies;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -39,6 +39,7 @@ public class PopularFragment extends Fragment implements PopularMoviesAdapter.On
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
+        setHasOptionsMenu(true);
 
         // Inflate the layout for this fragment.
         view = inflater.inflate(R.layout.fragment_popular, container, false);
@@ -59,43 +60,42 @@ public class PopularFragment extends Fragment implements PopularMoviesAdapter.On
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, POPULAR_MOVIES_URL,
                 null, new Response.Listener<JSONObject>() {
             @Override
-                public void onResponse(JSONObject response) {
-                    try {
-                        JSONArray jsonArray = response.getJSONArray("results");
+            public void onResponse(JSONObject response) {
+                try {
+                    JSONArray jsonArray = response.getJSONArray("results");
 
-                        for (int i = 0; i < jsonArray.length(); i++) {
-                            JSONObject results = jsonArray.getJSONObject(i);
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject results = jsonArray.getJSONObject(i);
 
-                            PopularMovies movie = new PopularMovies(results.getInt("id"),
+                        PopularMovies movie = new PopularMovies(results.getInt("id"),
                                 "https://image.tmdb.org/t/p/w500/" + results.getString("poster_path"),
                                 results.getString("title"),
                                 results.getString("release_date"),
                                 results.getString("vote_average")
-                                );
+                        );
 
-                            // Add the movie to the movies array list.
-                            movies.add(movie);
+                        // Add the movie to the movies array list.
+                        movies.add(movie);
 
-                            // Add movie to items to produce multi cell layout.
-                            // 0 id for large cell and 1 is for small cel.
-                            if (i == 0) {
-                                items.add(new Item(0, movies.get(i)));
-                            } else {
-                                items.add(new Item(1, movies.get(i)));
-                            }
+                        // Add movie to items to produce multi cell layout.
+                        // 0 id for large cell and 1 is for small cel.
+                        if (i == 0) {
+                            items.add(new Item(0, movies.get(i)));
+                        } else {
+                            items.add(new Item(1, movies.get(i)));
                         }
-
-                        // Set the adapter to generate the views.
-                        PopularMoviesAdapter moviesAdapter = new PopularMoviesAdapter(items);
-                        popularMoviesView.setAdapter(moviesAdapter);
-                        moviesAdapter.setOnMovieItemClickListener(PopularFragment.this);
-
-
-                    } catch (JSONException e) {
-                        e.printStackTrace();
                     }
+
+                    // Set the adapter to generate the views.
+                    PopularMoviesAdapter moviesAdapter = new PopularMoviesAdapter(items);
+                    popularMoviesView.setAdapter(moviesAdapter);
+                    moviesAdapter.setOnMovieItemClickListener(PopularFragment.this);
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 }
-            }, new Response.ErrorListener() {
+            }
+        }, new Response.ErrorListener() {
 
             @Override
             public void onErrorResponse(VolleyError error) {
@@ -118,6 +118,6 @@ public class PopularFragment extends Fragment implements PopularMoviesAdapter.On
 
         getActivity().getSupportFragmentManager().beginTransaction()
                 .replace(R.id.fragment_container, fragment)
-                .addToBackStack(null).commit();
+                .commit();
     }
 }
