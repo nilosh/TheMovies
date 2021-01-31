@@ -1,12 +1,13 @@
-package com.example.themovies.models;
-
-import android.widget.ImageView;
+package com.app.themovies.models;
 
 public class PopularMovies {
 
     // Variables to hold the values of views.
-    private int movieId;
-    private String moviePoster, movieTitle, movieReleaseDate, movieRating;
+    private final int movieId;
+    private final String moviePoster;
+    private final String movieTitle;
+    private final String movieReleaseDate;
+    private final String movieRating;
 
     // Constructor for creating popular movies.
     public PopularMovies(int movieId, String moviePoster, String movieTitle,
@@ -32,7 +33,7 @@ public class PopularMovies {
     }
 
     public String getMovieReleaseDate() {
-        return movieReleaseDate.substring(0,4);
+        return movieReleaseDate.substring(0, 4);
     }
 
     public String getMovieRating() {

@@ -11,7 +11,8 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
+            android:layout_height="wrap_content"
+            android:background="@color/main_variation">
 
             <ImageView
                 android:id="@+id/movieDetailBanner"
@@ -111,8 +112,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignTop="@+id/movieDetailPoster"
-                android:paddingLeft="30dp"
-                android:layout_marginStart="7dp"
+                android:layout_marginStart="30dp"
                 android:layout_marginTop="100dp"
                 android:layout_toEndOf="@+id/movieDetailPoster"
                 android:src="@drawable/rating_star_large" />
@@ -144,6 +144,24 @@
                 android:text="@string/movie_vote_count"
                 android:textColor="@color/ash"
                 android:textSize="18sp" />
+
+            <Button
+                android:id="@+id/favouriteIcon"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:textAllCaps="false"
+                android:padding="10dp"
+                android:textColor="@color/main"
+                android:background="@drawable/favs_button"
+                android:text="@string/add_to_favourites"
+                android:textStyle="bold"
+                android:layout_below="@+id/movieDetailRatingStar"
+                android:layout_alignStart="@+id/movieDetailRatingStar"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="30dp"
+                android:letterSpacing="0.1"
+                android:drawableLeft="@drawable/favourite_icon"
+                />
 
             <TextView
                 android:id="@+id/movieDetailCast"

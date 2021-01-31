@@ -1,8 +1,8 @@
-package com.example.themovies.models;
+package com.app.themovies.models;
 
 public class Item {
-    private int type;
-    private Object object;
+    private final int type;
+    private final Object object;
 
     // Constructor for generating item.
     public Item(int type, Object object) {
@@ -11,7 +11,6 @@ public class Item {
     }
 
     // Getters.
-
     public int getType() {
         return type;
     }
