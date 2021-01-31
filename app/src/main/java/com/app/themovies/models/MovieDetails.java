@@ -15,6 +15,7 @@ public class MovieDetails {
     ArrayList<Cast> cast;
     private final String poster;
     private final String backdrop;
+    private boolean isFavourite;
 
     public MovieDetails(int id, String title, String tagline, String year, ArrayList<String> genres,
                         String runtime, String description, String voteAverage, String voteCount,
@@ -30,6 +31,7 @@ public class MovieDetails {
         this.voteCount = voteCount;
         this.poster = poster;
         this.backdrop = backdrop;
+        isFavourite = false;
     }
 
     public int getId() {
@@ -86,5 +88,13 @@ public class MovieDetails {
 
     public void setCast(ArrayList<Cast> cast) {
         this.cast = cast;
+    }
+
+    public boolean isFavourite() {
+        return isFavourite;
+    }
+
+    public void setFavourite(boolean favourite) {
+        isFavourite = favourite;
     }
 }

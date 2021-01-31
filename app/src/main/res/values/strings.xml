@@ -29,6 +29,8 @@
     <string name="profile_email_tag">Email</string>
     <string name="profile_email_text">User Email</string>
     <string name="facebook_app_id">1962369470583461</string>
+    <string name="add_to_favourites">Add to Favourites</string>
+    <string name="remove_from_favs">Remove from Favourites</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
+
 </resources>
