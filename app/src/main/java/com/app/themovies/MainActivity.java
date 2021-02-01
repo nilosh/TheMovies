@@ -20,13 +20,14 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 import com.squareup.picasso.Picasso;
 
 public class MainActivity extends AppCompatActivity {
 
     MenuItem profile, logout;
-    GoogleSignInClient googleSignInClient;
     private Toolbar toolbar;
 
     @Override
@@ -46,28 +47,14 @@ public class MainActivity extends AppCompatActivity {
         profile = findViewById(R.id.profileItem);
         logout = findViewById(R.id.logoutItem);
 
-        // Configure sign-in options.
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestEmail()
-                .requestProfile()
-                .build();
+        // Add listener to bottom navigation pane to open designated fragments.
+        BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation);
+        bottomNav.setOnNavigationItemSelectedListener(navListener);
 
-        // Build a GoogleSignInClient with the options specified by gso.
-        googleSignInClient = GoogleSignIn.getClient(this, gso);
-
-        // Initialize object for google sign in account and get data if account is not null.
-        GoogleSignInAccount googleSignInAccount = GoogleSignIn.getLastSignedInAccount(MainActivity.this);
-        if (googleSignInAccount != null) {
-
-            // Add listener to bottom navigation pane to open designated fragments.
-            BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation);
-            bottomNav.setOnNavigationItemSelectedListener(navListener);
-
-            // Open first fragment as default.
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.fragment_container, new PopularFragment())
-                    .commit();
-        }
+        // Open first fragment as default.
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragment_container, new PopularFragment())
+                .commit();
     }
 
     // Listener for bottom navigation pane.
@@ -118,12 +105,17 @@ public class MainActivity extends AppCompatActivity {
 
     // Sign Out method for google account.
     private void signOut() {
-        googleSignInClient.signOut()
-            .addOnCompleteListener(this, task -> {
-                Intent intent = new Intent(this, UserAuthentication.class);
+        FirebaseAuth.getInstance().signOut();
+        GoogleSignIn.getClient(this, new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .build())
+                .signOut().addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                Intent intent = new Intent(MainActivity.this, UserAuthentication.class);
                 startActivity(intent);
                 finish();
-            });
+            }
+        });
     }
 
     // Create options menu in the action bar.

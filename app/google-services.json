@@ -1,13 +1,14 @@
 {
   "project_info": {
     "project_number": "436280231308",
+    "firebase_url": "https://themovieapp-f47c8-default-rtdb.firebaseio.com",
     "project_id": "themovieapp-f47c8",
     "storage_bucket": "themovieapp-f47c8.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:436280231308:android:045651ee531ca2886e42a9",
+        "mobilesdk_app_id": "1:436280231308:android:777f522af1417a216e42a9",
         "android_client_info": {
           "package_name": "com.app.themovies"
         }
